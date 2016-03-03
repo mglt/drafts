@@ -6,6 +6,7 @@
 <!ENTITY rfc4106 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4106.xml">
 <!ENTITY rfc4307 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4307.xml">
 <!ENTITY rfc7296 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7296.xml">
+<!ENTITY rfc7427 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7427.xml">
 <!ENTITY rfc5282 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5282.xml">
 ]>
 
@@ -440,6 +441,7 @@
       &rfc4106;
       &rfc4307;
       &rfc7296;
+      &rfc7427;
       &rfc5282;
     </references>
     <references title="Informative References"> 
