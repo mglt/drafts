@@ -58,7 +58,7 @@
         <email>pwouters@redhat.com</email>
       </address>
     </author>
-    <author fullname="Daniel Migault" initials="D." surname="Migault" role="editor">
+    <author fullname="Daniel Migault" initials="D." surname="Migault">
       <organization> Ericsson </organization>
       <address>
         <postal>
@@ -257,7 +257,7 @@
         prefer AES based pseudo-random functions in  order to avoid implementing SHA2. For the wide VPN 
         deployment, as it has not been widely adopted, it has been downgraded from SHOULD in RFC4307 to MAY.</t>
         <t>PRF_HMAC_MD5 has been downgraded from MAY in RFC4307 to MUST NOT. There is an industry-wide trend to 
-        deprecate its usage. MD5 is known to be subject to collision which can lead to transcript attacks.</t>  
+        deprecate its usage. MD5 is known to be subject to collision.</t>  
       </section>
 
       <section anchor="algs_integ" title="Type 3 - IKEv2 Integrity Algorithm Transforms">
@@ -291,7 +291,12 @@
       <section anchor="algs_dh" title="Type 4 - IKEv2 Diffie-Hellman Group Transforms">
         <t> There are several Modular Exponential (MODP) groups and several Elliptic Curve groups (ECC) that are 
           defined for use in IKEv2.  They are defined in both the [IKEv2] base document and in extensions documents. 
-          They are identified by group number.</t>
+          They are identified by group number. Note that it is critical to enforce a secure Diffie Hellman exchange
+          as this exchange provide perfect forward secrecy. In fact, if an attacker can retrieve the private numbers
+          (for example a, b) the public values (for example g**a, g**b), the attacker can compute the secret and the
+          keys used to secure the exchange. Such attack can be performed off-line on a recorded communication. This
+          for example, differs from an attack performed during the authentication that must be performed online.</t>
+          
         <texttable anchor="tbl_dh" suppress-title="true">
           <ttcol align="left">Number</ttcol>
           <ttcol align="left">Description</ttcol>
@@ -348,10 +353,15 @@
           <c>14</c><c>Digital Signature</c><c>SHOULD</c><c></c>
         </texttable>
         
-        <t>RSA Digital Signature is mostly kept for interoperability. It is expected to be downgraded 
-        in the future as signatures are based on RSASSA-PKCS1-v1.5, not any more recommended. 
-        Instead, more robust use of RSA is expected to be performed via the Digital Signature method. 
-        RSA Digital Signature are not recommended to use keys lower that 2048. These key lengths have
+        <t>RSA Digital Signature is widely deployed and therefor kept for interoperability.
+ 	Like the other algorithm-specific Authentication Methods, it is expected to be
+ 	downgraded in the future in favor of the generic Digital Signature method of
+ 	<xref target="RFC7427"/>
+ 	
+        Instead, more robust use of RSA is expected to be performed via the Digital Signature method.
+        RSA Digital Signature are not recommended to use keys less then 2048.
+        
+        These key lengths have
         not been further downgraded to remain coherent with the 1024-bit MODP Group whose status has been
         set to SHOULD NOT. Unlike 1024-bit MODP, attacks on authentication requires an online attacks and
         attacks performed after the authentication phase have very little value. On the other hand,
